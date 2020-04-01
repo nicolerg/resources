@@ -43,9 +43,12 @@ Home directory quota is fixed at 32GB. Just about the only thing that should be 
   - After April 3, 2020: `/oak/stanford/groups/smontgom`  
   - Most of your files should be in `${LAB_DIR}/SUNETID`. The first time you log into SCG, you will have to make your personal directory in `/labs/smontgom/` 
   - Shared lab data sets are in `${LAB_DIR}/shared` 
+  - Check the lab quota with `lfs quota -h -g scg_lab_smontgom /oak` (will change to `lfs quota -h -g lab_smontgom /oak` after April 3, 2020)
 
 ### Scratch space  
-You can use `/tmp`, but be warned that, like everything else on SCG, nothing is backed up. The hardware for the last scratch space died.  
+Every node on has SCG (both login and batch) has scratch space mounted at `/tmp`.  This scratch is available only to that node, and the files you create there are visible only to your user.  You have to copy anything you want to save **back to Oak** if you want to be able to access it from other nodes or allow other users to see it.  
+
+There is no quota in this scratch space, but storage is not unlimited.  Files will automatically be deleted when space starts to run out, with the oldest ones being deleted first.  **Do not use `/tmp` for long term storage**.  The main reason to use this is for temporary files you don't care about that may take up a lot of space, and because it is **local**, meaning that any operations you do on files in `/tmp` don't have to go over the network like they do for Oak.  This can lead to a big improvement for some disk intensive operations like alignment and variant/peak calling.
 
 ## Compute partitions 
 
@@ -93,7 +96,7 @@ python some_python_script.py # this is the process I want to run with the sbatch
 Then submit the job using `sbatch test_sbatch.sh`. **It is critical that the `--partition` flag is set to `interactive` if you don't want to get billed.** 
 
 ### BILLED `batch` partition 
-**You must get clearance from Stephen before running any jobs on the `batch` partition, which should be reserved for parallelizations beyond 16 cores or processes requiring more than 128GB of memory.** For the most part, you can pretend this option doesn't exist. 
+**You must get clearance from Stephen before running any jobs on the `batch` partition, which should be reserved for parallelizations beyond 16 cores or processes requiring more than 128GB of memory.** For the most part, you can pretend this option doesn't exist. Billing is done for number of CPUs used * actual run time - SCG does not charge for memory usage (but if you request too much your job might never run).
 
 You submit jobs to the `batch` partition the same way, with a couple of added flags:  
 
@@ -136,7 +139,11 @@ python some_python_script.py # this is the process I want to run with the sbatch
 Then submit the job using `sbatch test_sbatch.sh`. 
 
 ### `nih_s10` NIH Supercomputer
-Unless you're doing something really intensive like deep learning or modeling molecular dynamics, I don't know why you'd use this. You can read more about it [here](https://login.scg.stanford.edu/uv300/).
+This system has its own partition.  You can run jobs with many CPUs and lots of memory, and it also has Nvidia GPUs for CUDA-accelerated software (typically deep learning or molecular dynamics). While it is free to use, it is very busy so it usually has a long wait time, and it frequently suffers from extended downtime due to hardware instability.
+You can read more about it [here](https://login.scg.stanford.edu/uv300/).
+
+### Job arrays
+If you need to run a large number of jobs it is possible to use a job array with `sbatch` to automate this: https://slurm.schedmd.com/job_array.html.  If you need to do this it is likely to be expensive so please check with Stephen and ask on the lab Slack for additional guidance on how to do this.
 
 ## Software modules on SCG 
 `module load <module>` is your friend. If you can Google the bioinformatics tool, chances are SCG has already installed the software, and it’s loaded in a module. if you see `command not found`, try loading a module.  
@@ -176,7 +183,9 @@ Always [check if a module exists](#software-modules-on-scg) before installing so
 - For anything else: Install it as you would on durga, either in your home directory or in a `SOFTWARE` subfolder in your lab directory. 
 
 For particularly tricky installations, or just for anything you think might be useful for anyone else on SCG, add a software installation request to the `#software-install-requests` channel in [SCG's Slack Workspace](https://susciclu.slack.com). I tend to install software myself and also add a request to the channel for anything that's not already installed on SCG.  
-  
+
+Options for more advanced users include Linuxbrew (https://docs.brew.sh/Homebrew-on-Linux), your own Miniconda installation (https://docs.conda.io/en/latest/miniconda.html), and `local::lib` for Perl packages (but really, try to avoid Perl if possible!)
+
 ## SCG OnDemand
 I <3 SCG OnDemand: https://ondemand.scg.stanford.edu/pun/sys/dashboard 
   - `Files` tab lets you do file I/O in your home or `/labs/smontgom` paths 
@@ -222,3 +231,6 @@ Kill a job. Use `-j JOBID` for a single job or `-u SUNETID` for ALL of your jobs
   - Because of NFS things, I recommend adding a `--latency-wait` flag to your calls to `snakemake` pipelines. This means the pipeline will wait up to the specified number of seconds for a file to appear before aborting with an error. 
   - See [this thread](https://susciclu.slack.com/archives/C8CNSTB88/p1550866979024200) in SCG Slack if you would like to keep track of resources for an interactive job. 
   - See [these instructions](https://login.scg.stanford.edu/tutorials/data_management/#samba) for how to mount SCG directories locally with Samba.  
+  - Globus is another option for transferring files (https://www.globus.org) - it does not require 2-factor authentication!
+  - rclone (https://rclone.org) makes it possible to transfer data from SCG to Box (PHI approved!), Google Drive, Dropbox, Google Cloud etc.
+  - SCG is **NOT** PHI-approved
