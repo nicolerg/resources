@@ -1,10 +1,28 @@
 # SCG Primer
 
+## Table of Contents
+  - [Other resources](#other-resources)
+  - [Login nodes](#login-nodes)
+  - [Directories](#directories)
+      - [Home directory](#home-directory-sunetid)
+      - [Lab directory](#lab-directory)
+      - [Scratch space](#scratch-space) 
+  - [Compute partitions](#compute-partitions)
+      - [FREE `interactive` partition](#free-interactive-partition)
+      - [BILLED `batch` partition](#billed-batch-partition)
+      - [`nih_s10` NIH Supercomputer](#nihs10-nih-supercomputer)
+  - [Software modules on SCG](#software-modules-on-scg)
+  - [Installing software on SCG](#installing-software-on-scg)
+  - [SCG OnDemand](#scg-ondemand)
+      - [Interactive RStudio](#interactive-rstudio)
+  - [SLURM basics](#slurm-basics)
+  - [Miscellaneous tidbits](#miscellaneous-tidbits)
+
 ## Other resources 
   - [This Google Doc](https://docs.google.com/document/d/1kTEG6fDjbLhzV7e-ThgpYK3THnoibb9RU57ZLm8EtBs/edit) may also be helpful, but everything looks prettier with Markdown   
   - SCG docs: https://login.scg.stanford.edu/  
   - SCG Slack: https://susciclu.slack.com **If you use SCG, I highly recommend joining this Slack Workspace.** While it’s not quite as helpful now that John Hanks is gone (sob), you may still get responses from the SCG community if you post a question or error that a Google search didn’t help you answer. It’s also the place to post software installation requests (`#software-install-requests` channel). 
-
+  
 ## Login nodes 
 You start on a login node every time you log in to SCG. Login nodes are the same nodes as the interactive partition, but they still have limited resources (16GB of memory and a restricted number of processes) until you start a session in the interactive partition. Login nodes are meant for navigating directories, starting `screen`/`tmux` sessions, and other non-intenstive, minor processes. 
 
