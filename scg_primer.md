@@ -28,7 +28,7 @@ Home directory quota is fixed at 32GB. Just about the only thing that should be 
 ### Scratch space  
 You can use `/tmp`, but be warned that, like everything else on SCG, nothing is backed up. The hardware for the last scratch space died.  
 
-## Compute paritions 
+## Compute partitions 
 
 ### FREE `interactive` partition 
 **This is where you should do the vast majority of your computation.** 16 cores, 128GB total are available for all running interactive jobs **PER PERSON**. You can split up those resources any way you would like. This is more than each person can politely use on `durga`.  
