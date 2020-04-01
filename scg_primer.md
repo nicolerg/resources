@@ -14,13 +14,22 @@ Because there are several login nodes and screen sessions are only available on 
 ```bash
 echo 'alias scg="ssh SUNETID@login04.scg.stanford.edu"' >> ~/.bash_profile
 ```
-The first time you add this line to your `~/bash*` file, you have to run `source ~/.bash_profile` for the alias to register. After that, the `scg` command will be recognized every time you start Terminal.  
-
-### 
-
+The first time you add this line to your `~/bash*` file, you have to run `source ~/.bash_profile` for the alias to register. After that, the `scg` command will be recognized every time you start Terminal. Then just run `scg` to log in to SCG.  
 
 ### FREE interactive partition 
-Resources available **PER PERSON**: 16 cores, 128GB total for all running interactive jobs
+**This is where you should do the vast majority of your computation.** 16 cores, 128GB total are available for all running interactive jobs **PER PERSON**. You can split up those resources any way you would like. This is more than each person can politely use on durga.  
+
+To start an interactive session:  
+1. Log in 
+2. Start a `screen`/`tmux` session (you should do this for any process that you expect to take more than a minute in case you connection to SCG is interrupted)  
+3. Launch a job in the interactive partition:  
+    ```bash 
+    sdev -c 1 -m 20G -t 24:00:00
+    ```
+    - `sdev` is a shortcut for `srun`
+    - `-c`: number of cores
+    - `-m`: memory (`M` or `G` suffix) 
+    - `-t`: time (format `DD-HH:MM:SS`)
 
 ## Directories 
 ### Home directory (`~/SUNETID`)
