@@ -4,7 +4,24 @@
   - [This Google Doc](https://docs.google.com/document/d/1kTEG6fDjbLhzV7e-ThgpYK3THnoibb9RU57ZLm8EtBs/edit) may also be helpful, but everything looks prettier with Markdown   
   - SCG docs: https://login.scg.stanford.edu/  
   - SCG Slack: susciclu.slack.com  
-  
+
+## Login nodes and partitions  
+### Login nodes
+You start on a login node every time you log in to SCG. Login nodes are the same nodes as the interactive partition, but they still have limited resources (16GB of memory and a restricted number of processes) until you start a session in the interactive partition. Login nodes are meant for navigating directories, starting `screen`/`tmux` sessions, and other non-intenstive, minor processes. 
+
+Because there are several login nodes and screen sessions are only available on the node on which they were initialized, I **highly recommend** adding an alias to your **LOCAL** `~/.bashrc` or `~/.bash_profile` to set a persistent login node (it doesn't matter which one). That way, you will always log into the same login node whenever you connect to SCG, and your `screen` sessions will always be where you expect them. For example:
+
+```bash
+echo 'alias scg="ssh SUNETID@login04.scg.stanford.edu"' >> ~/.bash_profile
+```
+The first time you add this line to your `~/bash*` file, you have to run `source ~/.bash_profile` for the alias to register. After that, the `scg` command will be recognized every time you start Terminal.  
+
+### 
+
+
+### FREE interactive partition 
+Resources available **PER PERSON**: 16 cores, 128GB total for all running interactive jobs
+
 ## Directories 
 ### Home directory (`~/SUNETID`)
 Home directory quota is fixed at 32GB. Just about the only thing that should be there is software that you install.  
@@ -17,16 +34,7 @@ Shared lab data sets are in `${LAB_DIR}}/shared`.
 
 ### Scratch space  
 You can use `/tmp`, but be warned that, like everything else on SCG, nothing is backed up. The hardware for the last scratch space died.  
-  
-## Login nodes and partitions  
-### Login nodes
-You start on a login node every time you log in to SCG. Login nodes are the same nodes as the interactive partition, but they still have limited resources until you start a session in the interactive partition. Login nodes are meant for navigating directories, starting `screen`/`tmux` sessions, and other non-intenstive, minor processes (16GB of memory and a restricted number of processes). 
 
-### 
-
-
-### FREE interactive partition 
-Resources available **PER PERSON**: 16 cores, 128GB total for all running interactive jobs
 
 
 See [these instructions](https://login.scg.stanford.edu/tutorials/data_management/#samba) for how to mount SCG directories locally with Samba.  
