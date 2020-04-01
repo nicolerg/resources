@@ -5,8 +5,7 @@
   - SCG docs: https://login.scg.stanford.edu/  
   - SCG Slack: https://susciclu.slack.com **If you use SCG, I highly recommend joining this Slack Workspace.** In addition to serving as a forum where you can ask questions and request software installations, there is also a large searchable message history.  
 
-## Login nodes and partitions  
-### Login nodes
+## Login nodes 
 You start on a login node every time you log in to SCG. Login nodes are the same nodes as the interactive partition, but they still have limited resources (16GB of memory and a restricted number of processes) until you start a session in the interactive partition. Login nodes are meant for navigating directories, starting `screen`/`tmux` sessions, and other non-intenstive, minor processes. 
 
 Because there are several login nodes and screen sessions are only available on the node on which they were initialized, I **highly recommend** adding an alias to your **LOCAL** `~/.bashrc` or `~/.bash_profile` to set a persistent login node (it doesn't matter which one). That way, you will always log into the same login node whenever you connect to SCG, and your `screen` sessions will always be where you expect them. For example:
@@ -15,6 +14,21 @@ Because there are several login nodes and screen sessions are only available on 
 echo 'alias scg="ssh SUNETID@login04.scg.stanford.edu"' >> ~/.bash_profile
 ```
 The first time you add this line to your `~/bash*` file, you have to run `source ~/.bash_profile` for the alias to register. After that, the `scg` command will be recognized every time you start Terminal. Then just run `scg` to log in to SCG.  
+
+## Directories 
+### Home directory (`~/SUNETID`)
+Home directory quota is fixed at 32GB. Just about the only thing that should be there is software that you install.  
+
+### Lab directory 
+Currently: `/labs/smontgom/`  
+After April 3, 2020: `/oak/stanford/groups/smontgom`  
+Most of your files should be in `${LAB_DIR}/SUNETID`. The first time you log into SCG, you will have to make your personal directory in `/labs/smontgom/`.  
+Shared lab data sets are in `${LAB_DIR}}/shared`. 
+
+### Scratch space  
+You can use `/tmp`, but be warned that, like everything else on SCG, nothing is backed up. The hardware for the last scratch space died.  
+
+## Compute paritions 
 
 ### FREE `interactive` partition 
 **This is where you should do the vast majority of your computation.** 16 cores, 128GB total are available for all running interactive jobs **PER PERSON**. You can split up those resources any way you would like. This is more than each person can politely use on `durga`.  
@@ -60,28 +74,50 @@ python some_python_script.py # this is the process I want to run with the sbatch
 Then submit the job using `sbatch test_sbatch.sh`. **It is critical that the `--partition` flag is set to `interactive` if you don't want to get billed.** 
 
 ### BILLED `batch` partition 
-**You must get clearance from Stephen before running any jobs on the `batch` partition, which should be reserved for parallelizations beyond 16 cores or processes requiring more than 128GB of memory.** You can submit jobs to the `batch` partition two different ways:  
-  - use `sdev` with a couple of more flags:
-      ```bash
-      sdev -c 1 -m 20G -t 24:00:00 -a smontgom -p batch
-      ```
-  - more common: submit an [`sbatch` script](https://login.scg.stanford.edu/tutorials/job_scripts/#what-is-a-job-script), which includes resources in flags and is submitted to the SLURM job queue with `sbatch`, e.g.:
+**You must get clearance from Stephen before running any jobs on the `batch` partition, which should be reserved for parallelizations beyond 16 cores or processes requiring more than 128GB of memory.** For the most part, you can pretend this option doesn't exist. 
 
+You submit jobs to the `batch` partition the same way, with a couple of added flags:  
 
-echo 'Hello World!'
+#### Interactive session like durga ON THE BILLED `batch` PARTITION 
+1. Start a `screen`/`tmux` session (you should do this for any process that you expect to take more than a minute in case your connection to SCG is interrupted)  
+2. Launch a job in the `interactive` partition
+    ```bash 
+    sdev -c 1 -m 20G -t 24:00:00 -a smontgom -p batch
+    ```
+    - `sdev` is a shortcut for `srun`, which is a SLURM command 
+    - `-c`: number of cores
+    - `-m`: memory (`M` or `G` suffix) 
+    - `-t`: time (format `DD-HH:MM:SS`)
+    - `-a`: account (for us, `smontgom`)
+    - `-p`: partition, either `interactive` (default, free) or `batch` (billed; requires `-a`)
 
-## Directories 
-### Home directory (`~/SUNETID`)
-Home directory quota is fixed at 32GB. Just about the only thing that should be there is software that you install.  
+#### Submit a job to the BILLED `batch` session with `sbatch` 
+If you are running polished code or a standard pipeline that you don't need to worry about debugging, you may prefer to submit a job to the `interactive` job queue using `sbatch`. 
 
-### Lab directory 
-Currently: `/labs/smontgom/`  
-After April 3, 2020: `/oak/stanford/groups/smontgom`  
-Most of your files should be in `${LAB_DIR}/SUNETID`. The first time you log into SCG, you will have to make your personal directory in `/labs/smontgom/`.  
-Shared lab data sets are in `${LAB_DIR}}/shared`. 
+First, write an `sbatch` script, e.g. `test_sbatch.sh`:
+```bash 
+#!/bin/bash
 
-### Scratch space  
-You can use `/tmp`, but be warned that, like everything else on SCG, nothing is backed up. The hardware for the last scratch space died.  
+# See `man sbatch` or https://slurm.schedmd.com/sbatch.html for descriptions
+# of sbatch options.
+#SBATCH --job-name=test
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --partition=batch
+#SBATCH --account=smontgom
+#SBATCH --time=12:00:00
+
+# by default, log files are written to the pwd 
+
+set -e 
+module load miniconda/3
+python some_python_script.py # this is the process I want to run with the sbatch script 
+``` 
+Then submit the job using `sbatch test_sbatch.sh`. 
+
+### `nih_s10` NIH Supercomputer
+Unless you're doing something really intensive like deep learning or modeling molecular dynamics, I don't know why you'd use this. You can read more about it [here](https://login.scg.stanford.edu/uv300/).
 
 
 
