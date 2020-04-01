@@ -20,10 +20,10 @@ The first time you add this line to your `~/bash*` file, you have to run `source
 Home directory quota is fixed at 32GB. Just about the only thing that should be there is software that you install.  
 
 ### Lab directory 
-Currently: `/labs/smontgom/`  
-After April 3, 2020: `/oak/stanford/groups/smontgom`  
-Most of your files should be in `${LAB_DIR}/SUNETID`. The first time you log into SCG, you will have to make your personal directory in `/labs/smontgom/`.  
-Shared lab data sets are in `${LAB_DIR}}/shared`. 
+  - Currently: `/labs/smontgom/`  
+  - After April 3, 2020: `/oak/stanford/groups/smontgom`  
+  - Most of your files should be in `${LAB_DIR}/SUNETID`. The first time you log into SCG, you will have to make your personal directory in `/labs/smontgom/`.  
+  - Shared lab data sets are in `${LAB_DIR}}/shared`. 
 
 ### Scratch space  
 You can use `/tmp`, but be warned that, like everything else on SCG, nothing is backed up. The hardware for the last scratch space died.  
