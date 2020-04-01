@@ -124,41 +124,37 @@ Unless you're doing something really intensive like deep learning or modeling mo
 
 Some `module` commands:
   - `module avail`: Get a (long) list of existing modules; use arrow keys to scroll; `q` to exit
-  - `module keyword <keyword>`: Search for modules containing a keyword; use arrow keys to scroll; `q` to exit  
+  - `module keyword <keyword>`: Search for modules containing a keyword; use arrow keys to scroll; `q` to exit 
+  - `module unload <module>`: Unload a module 
+  - `module purge`: Unload all modules (i.e. revert back to login state)
   
 *How can you find files associated with a module after you load it?*   
 Almost all module add the path to the modules programs/scripts to the `PATH` variable, so this will show you that entry:
 `echo $PATH | tr ':' '\n'`
-  
-  
-BEFORE trying to run python:
-python2: “module load miniconda/2”
-python3: “module load miniconda/3”
-BEFORE trying to run R or Rscript:
-R v3.6: “module load r/3.6”
-R v3.5: “module load r/3.5”
-to load outdated modules, like older versions of R, run “module load legacy” first; then, for example, “module load r/3.4”
 
-
-
-
-
+A few of the most critical ones, for example:  
+  - BEFORE trying to run `python`:
+  ```bash
+  module load miniconda/2 #python2
+  module load miniconda/3 #python3
+  ```
+  - BEFORE trying to run `R` or `Rscript`:
+  ```bash
+  module load r/3.6
+  module load r/3.5 
+  ```
+  - To load outdated modules, like older versions of R, run `module load legacy` first; then, for example, `module load r/3.4`
   
 ## SCG OnDemand
-
-SUPER HELPFUL!!
-https://ondemand.scg.stanford.edu/pun/sys/dashboard
-“Files” tab lets you do file I/O in your home or /labs/smontgom paths
-“Interactive Apps” lets you run RStudio, Jupyter Notebooks, and other tools interactively while using SCG file systems and compute resources 
-about interactive RStudio
-By default, an .rstudio folder is created in your home directory the first time you start an RStudio session. For whatever reason, this can be REALLY slow (something about file I/O in the file system used for home directories). If you start noticing that basic commands in RStudio are being slow, do the following:
-kill your sessions
-run mv ~/.rstudio ~/.rstudio-backup && ln -s /tmp ~/.rstudio
-start a new session. things should be faster now! (the file system that uses /tmp is faster)
-
-
-
-
+I <3 SCG OnDemand: https://ondemand.scg.stanford.edu/pun/sys/dashboard 
+  - `Files` tab lets you do file I/O in your home or `/labs/smontgom` paths 
+  - `Interactive Apps` lets you run RStudio, Jupyter Notebooks, and other tools interactively while using SCG file systems and compute resources 
+  
+### Interactive RStudio
+By default, an `.rstudio` folder is created in your home directory the first time you start an RStudio session. For whatever reason, this can be REALLY slow (something about file I/O in the file system used for home directories). If you start noticing that basic commands in RStudio are being slow, do the following:
+1. Kill your sessions
+2. `mv ~/.rstudio ~/.rstudio-backup && ln -s /tmp ~/.rstudio`
+3. Start a new session. Things should be faster now! (the file system that uses `/tmp` is faster)
 
 ## SLURM basics
 SLURM is the job scheduler that SCG uses. See SCG documentation of SLURM basics [here](https://login.scg.stanford.edu/tutorials/job_scripts/). Here are a few commands to know:
