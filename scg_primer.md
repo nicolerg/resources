@@ -3,7 +3,7 @@
 ## Other resources 
   - [This Google Doc](https://docs.google.com/document/d/1kTEG6fDjbLhzV7e-ThgpYK3THnoibb9RU57ZLm8EtBs/edit) may also be helpful, but everything looks prettier with Markdown   
   - SCG docs: https://login.scg.stanford.edu/  
-  - SCG Slack: susciclu.slack.com  
+  - SCG Slack: https://susciclu.slack.com **If you use SCG, I highly recommend joining this Slack Workspace.** In addition to serving as a forum where you can ask questions and request software installations, there is also a large searchable message history.  
 
 ## Login nodes and partitions  
 ### Login nodes
@@ -16,13 +16,14 @@ echo 'alias scg="ssh SUNETID@login04.scg.stanford.edu"' >> ~/.bash_profile
 ```
 The first time you add this line to your `~/bash*` file, you have to run `source ~/.bash_profile` for the alias to register. After that, the `scg` command will be recognized every time you start Terminal. Then just run `scg` to log in to SCG.  
 
-### FREE interactive partition 
+### FREE `interactive` partition 
 **This is where you should do the vast majority of your computation.** 16 cores, 128GB total are available for all running interactive jobs **PER PERSON**. You can split up those resources any way you would like. This is more than each person can politely use on `durga`.  
 
-To start an interactive session:  
-1. Log in 
-2. Start a `screen`/`tmux` session (you should do this for any process that you expect to take more than a minute in case your connection to SCG is interrupted)  
-3. Launch a job in the interactive partition:  
+Launch a process in the `interactive` partition after logging in. There are two ways to do this: 
+
+#### Interactive session like durga 
+1. Start a `screen`/`tmux` session (you should do this for any process that you expect to take more than a minute in case your connection to SCG is interrupted)  
+2. Launch a job in the `interactive` partition
     ```bash 
     sdev -c 1 -m 20G -t 24:00:00
     ```
@@ -31,7 +32,43 @@ To start an interactive session:
     - `-m`: memory (`M` or `G` suffix) 
     - `-t`: time (format `DD-HH:MM:SS`) 
 
-Once the resources are allocated, you essentially get `ssh`-ed into a new bash session with the requested resources. Then you can start running scripts (almost) just like you would with `durga`.  
+Once the resources are allocated, you essentially get `ssh`-ed into a new bash session with the requested resources. Then you can start running scripts (almost) just like you would with `durga`. 
+
+#### Submit a job to the `interactive` session with `sbatch` 
+If you are running polished code or a standard pipeline that you don't need to worry about debugging, you may prefer to submit a job to the `interactive` job queue using `sbatch`. 
+
+First, write an `sbatch` script, e.g. `test_sbatch.sh`:
+```bash 
+#!/bin/bash
+
+# See `man sbatch` or https://slurm.schedmd.com/sbatch.html for descriptions
+# of sbatch options.
+#SBATCH --job-name=test
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --partition=interactive
+#SBATCH --account=default
+#SBATCH --time=12:00:00
+
+# by default, log files are written to the pwd 
+
+set -e 
+module load miniconda/3
+python some_python_script.py # this is the process I want to run with the sbatch script 
+``` 
+Then submit the job using `sbatch test_sbatch.sh`. **It is critical that the `--partition` flag is set to `interactive` if you don't want to get billed.** 
+
+### BILLED `batch` partition 
+**You must get clearance from Stephen before running any jobs on the `batch` partition, which should be reserved for parallelizations beyond 16 cores or processes requiring more than 128GB of memory.** You can submit jobs to the `batch` partition two different ways:  
+  - use `sdev` with a couple of more flags:
+      ```bash
+      sdev -c 1 -m 20G -t 24:00:00 -a smontgom -p batch
+      ```
+  - more common: submit an [`sbatch` script](https://login.scg.stanford.edu/tutorials/job_scripts/#what-is-a-job-script), which includes resources in flags and is submitted to the SLURM job queue with `sbatch`, e.g.:
+
+
+echo 'Hello World!'
 
 ## Directories 
 ### Home directory (`~/SUNETID`)
