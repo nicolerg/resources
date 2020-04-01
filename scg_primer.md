@@ -145,6 +145,19 @@ A few of the most critical ones, for example:
   ```
   - To load outdated modules, like older versions of R, run `module load legacy` first; then, for example, `module load r/3.4`
   
+## Installing software on SCG 
+Always [check if a module exists](#software-modules-on-scg) before installing software on SCG. If you're really sure you need to install it, there are a few ways to do it:  
+- For `R` packages:
+    - Load the `r` module corresponding to the version in which you want to install the package (e.g. `module load r/3.6`) 
+    - Launch `R` and install packages as usual (e.g. with `install.packages()`). The first time you do this, answer `yes` to let it make a library in your home directory.  
+    - Extra tidbit: Use the `.libPaths()` command in `R` to see which paths `R` is looking in to load libraries  
+- For `python` modules:  
+    - Load the `python` module corresponding to the version in which you want to install the package (e.g. `module load miniconda/3`)  
+    - Use `pip install --user MODULE` to install a module locally. Note you will need to load the same module before trying to import this module in the future (e.g. `module load miniconda/3`)  
+- For anything else: Install it as you would on durga, either in your home directory or in a `SOFTWARE` subfolder in your lab directory. 
+
+For particularly tricky installations, or just for anything you think might be useful for anyone else on SCG, add a software installation request to the `#software-install-requests` channel in [SCG's Slack Workspace](https://susciclu.slack.com). I tend to install software myself and also add a request to the channel for anything that's not already installed on SCG.  
+  
 ## SCG OnDemand
 I <3 SCG OnDemand: https://ondemand.scg.stanford.edu/pun/sys/dashboard 
   - `Files` tab lets you do file I/O in your home or `/labs/smontgom` paths 
