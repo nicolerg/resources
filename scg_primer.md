@@ -1,4 +1,5 @@
-# SCG Primer
+# SCG Primer 
+Contact: Nicole Gay nicolerg@stanford.edu
 
 ## Table of Contents
   - [Other resources](#other-resources)
