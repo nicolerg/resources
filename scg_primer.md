@@ -223,7 +223,7 @@ Kill a job. Use `-j JOBID` for a single job or `-u SUNETID` for ALL of your jobs
 
 ### Other SLURM tips and tricks
   - `echo $SLURM_JOB_ID` will tell you if you’re inside a job (yes, you might forget when you get lost in the layers of screen sessions and interactive jobs)
-  - If a running job looks “stuck”, i.e. it’s been actively running much longer than you would expect it to, run `scontrol requeue JOBID` to “unstick it”. This does NOT restart the job from the beginning
+  - If a running job looks “stuck”, i.e. it’s been actively running much longer than you would expect it to, `ssh` into the node it's running on and `htop` to see if it looks active. If there are processes running but with very low CPU usage, something may have gone wrong. Run `scontrol requeue JOBID` to kill and resubmit the job to the queue
   - To attach to a node running with `srun` (to see what processes are running, for example), run `srun --jobid JOBID --pty bash -l`. This is like SSHing into the node that the job is running on. `exit` will end that SSH session but not your srun-initiated jobs on that node. (Alternatively, you can actually just `ssh` into the node displayed from `squeue`.) 
 
 ## Miscellaneous tidbits 
