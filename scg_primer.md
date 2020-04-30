@@ -11,6 +11,7 @@
       - [FREE `interactive` partition](#free-interactive-partition)
       - [BILLED `batch` partition](#billed-batch-partition)
       - [`nih_s10` NIH Supercomputer](#nih_s10-nih-supercomputer)
+      - [Job arrays](#job-arrays)
   - [Software modules on SCG](#software-modules-on-scg)
   - [Installing software on SCG](#installing-software-on-scg)
   - [SCG OnDemand](#scg-ondemand)
