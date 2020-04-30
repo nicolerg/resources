@@ -1,4 +1,4 @@
-# How to use Box
+# How to use rclone with Stanford Box
 
 Find the rclone documentation for Box [here](https://rclone.org/box/). 
 
@@ -7,7 +7,7 @@ Find the rclone documentation for Box [here](https://rclone.org/box/).
 - [Reauthorize existing Box remote](#reauthorize-existing-box-remote)
 - [Mount Box](#mount-box)
 - [Copy files *to* Box](#copy-files-to-box)
-  - [Copy a few files < 15GB to Box]()
+  - [Copy a few files < 15GB to Box](#copy-a-few-files--15gb-to-box)
   - [Copy a large folder to Box](#copy-a-large-folder-to-box)
 - [Restore old files *from* Box](#restore-old-files-from-box)
 
