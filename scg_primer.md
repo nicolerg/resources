@@ -1,4 +1,5 @@
 # SCG Primer 
+Welcome to SCG! Here is some information that should help you use the SCG Informatics Cluster efficiently. If you are looking to make an account, see [how to request an account](https://login.scg.stanford.edu/accounts/).
 
 ## Table of Contents
   - [Other resources](#other-resources)
