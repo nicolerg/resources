@@ -94,6 +94,8 @@ Then submit the job using `sbatch test_sbatch.sh`. **It is critical that the `--
 ### BILLED `batch` partition 
 The `batch` partition its ideal for parallelizations beyond 16 cores or processes requiring more than 128GB of memory. Billing is done for number of CPUs used * actual run time - SCG does not charge for memory usage (but if you request too much your job might never run).
 
+Use the `labstats` command to see how much CPU time each lab user has racked up during the billed month.  
+
 You submit jobs to the `batch` partition the same way, with a couple of added flags:  
 
 #### Interactive session like durga ON THE BILLED `batch` PARTITION 
@@ -229,5 +231,5 @@ Kill a job. Use `-j JOBID` for a single job or `-u SUNETID` for **ALL** of your 
   - See [this thread](https://susciclu.slack.com/archives/C8CNSTB88/p1550866979024200) in SCG Slack if you would like to keep track of resources for an interactive job. 
   - See [these instructions](https://login.scg.stanford.edu/tutorials/data_management/#samba) for how to mount SCG directories locally with Samba.  
   - Globus is another option for transferring files (https://www.globus.org) - it does not require 2-factor authentication!
-  - rclone (https://rclone.org) makes it possible to transfer data from SCG to Box (PHI approved!), Google Drive, Dropbox, Google Cloud etc. See [this tutorial]() for more info.
+  - rclone (https://rclone.org) makes it possible to transfer data from SCG to Box (PHI approved!), Google Drive, Dropbox, Google Cloud etc. See [this tutorial](https://github.com/nicolerg/resources/blob/master/rclone_box.md) for more info.
   - SCG is **NOT** PHI-approved
