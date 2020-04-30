@@ -2,6 +2,15 @@
 
 Find the rclone documentation for Box [here](https://rclone.org/box/). 
 
+## Table of Contents 
+- [Create a Box remote](#create-a-box-remote)
+- [Reauthorize existing Box remote](#reauthorize-existing-box-remote)
+- [Mount Box](#mount-box)
+- [Copy files *to* Box](#copy-files-to-box)
+  - [Copy a few files < 15GB to Box]()
+  - [Copy a large folder to Box](#copy-a-large-folder-to-box)
+- [Restore old files *from* Box](#restore-old-files-from-box)
+
 # Create a Box remote
 
 You can log into Stanford Box [here](https://stanford.app.box.com/). Through the web app, you can view your files, share them with collaborators, etc. 
