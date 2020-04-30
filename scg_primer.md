@@ -19,7 +19,6 @@
   - [Miscellaneous tidbits](#miscellaneous-tidbits)
 
 ## Other resources 
-  - [This Google Doc](https://docs.google.com/document/d/1kTEG6fDjbLhzV7e-ThgpYK3THnoibb9RU57ZLm8EtBs/edit) may also be helpful, but everything looks prettier with Markdown   
   - SCG docs: https://login.scg.stanford.edu/  
   - SCG Slack: https://susciclu.slack.com **If you use SCG, I highly recommend joining this Slack Workspace.** You are likely to get responses from SCG employees or other members of the SCG community if you post a question or error that a Google search didn’t help you answer. It’s also the place to post software installation requests (`#software-install-requests` channel). 
   
@@ -38,11 +37,9 @@ The first time you add this line to your `~/bash*` file, you have to run `source
 Home directory quota is fixed at 32GB. Just about the only thing that should be there is software that you install.  
 
 ### Lab directory 
-  - Currently: `/labs/smontgom/`  
-  - After April 3, 2020: `/oak/stanford/groups/smontgom`  
-  - Most of your files should be in `${LAB_DIR}/SUNETID`. The first time you log into SCG, you will have to make your personal directory in `/labs/smontgom/` 
-  - Shared lab data sets are in `${LAB_DIR}/shared` 
-  - Check the lab quota with `lfs quota -h -g scg_lab_smontgom /oak` (will change to `lfs quota -h -g lab_smontgom /oak` after April 3, 2020)
+This is either `/labs/[LAB]` or `/oak/stanford/groups/[LAB]` depending on your PI. Most of your files should be in `${LAB_DIR}/SUNETID`. You may have to make this directory yourself when you first join a group on SCG.  
+
+Check the lab quota with `lfs quota -h -g scg_lab_[LAB] /oak` OR `lfs quota -h -g lab_[LAB] /oak` (for `/labs/[LAB]` and `/oak/stanford/groups/[LAB]`, respectively). 
 
 ### Scratch space  
 Every node on has SCG (both login and batch) has scratch space mounted at `/tmp`.  This scratch is available only to that node, and the files you create there are visible only to your user.  You have to copy anything you want to save **back to Oak** if you want to be able to access it from other nodes or allow other users to see it.  
@@ -52,7 +49,7 @@ There is no quota in this scratch space, but storage is not unlimited.  Files wi
 ## Compute partitions 
 
 ### FREE `interactive` partition 
-**This is where you should do the vast majority of your computation.** 16 cores, 128GB total are available for all running interactive jobs **PER PERSON**. You can split up those resources any way you would like. This is more than each person can politely use on `durga`.  
+16 cores, 128GB total are available for all running interactive jobs **PER PERSON**. You can split up those resources any way you would like. 
 
 Launch a process in the `interactive` partition after logging in. There are two ways to do this: 
 
@@ -95,21 +92,22 @@ python some_python_script.py # this is the process I want to run with the sbatch
 Then submit the job using `sbatch test_sbatch.sh`. **It is critical that the `--partition` flag is set to `interactive` if you don't want to get billed.** 
 
 ### BILLED `batch` partition 
-**You must get clearance from Stephen before running any jobs on the `batch` partition, which should be reserved for parallelizations beyond 16 cores or processes requiring more than 128GB of memory.** For the most part, you can pretend this option doesn't exist. Billing is done for number of CPUs used * actual run time - SCG does not charge for memory usage (but if you request too much your job might never run).
+The `batch` partition its ideal for parallelizations beyond 16 cores or processes requiring more than 128GB of memory. Billing is done for number of CPUs used * actual run time - SCG does not charge for memory usage (but if you request too much your job might never run).
 
 You submit jobs to the `batch` partition the same way, with a couple of added flags:  
 
 #### Interactive session like durga ON THE BILLED `batch` PARTITION 
+The only reason you would do this is if you are out of resources on the `interactive` partition or you want to run a job with >128GB interactively (unlikely). 
 1. Start a `screen`/`tmux` session (you should do this for any process that you expect to take more than a minute in case your connection to SCG is interrupted)  
 2. Launch a job in the `batch` partition
     ```bash 
-    sdev -c 1 -m 20G -t 24:00:00 -a smontgom -p batch
+    sdev -c 1 -m 20G -t 24:00:00 -a [LAB_ACCOUNT] -p batch
     ```
     - `sdev` is a shortcut for `srun`, which is a SLURM command 
     - `-c`: number of cores
     - `-m`: memory (`M` or `G` suffix) - bump this up if you get a core dump or out-of-memory error
     - `-t`: time (format `DD-HH:MM:SS`)
-    - `-a`: account (for us, `smontgom`)
+    - `-a`: account (not sure what this is? run `scgwhoami` when logged into SCG and look under `Available SLURM Accounts`)
     - `-p`: partition, either `interactive` (default, free) or `batch` (billed; requires `-a`)
 
 #### Submit a job to the BILLED `batch` session with `sbatch` 
@@ -126,7 +124,7 @@ First, write an `sbatch` script, e.g. `test_sbatch.sh`:
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --partition=batch
-#SBATCH --account=smontgom
+#SBATCH --account=[LAB_ACCOUNT]
 #SBATCH --time=12:00:00
 
 # by default, log files are written to the pwd 
@@ -138,11 +136,11 @@ python some_python_script.py # this is the process I want to run with the sbatch
 Then submit the job using `sbatch test_sbatch.sh`. 
 
 ### `nih_s10` NIH Supercomputer
-This system has its own partition.  You can run jobs with many CPUs and lots of memory, and it also has Nvidia GPUs for CUDA-accelerated software (typically deep learning or molecular dynamics). While it is free to use, it is very busy so it usually has a long wait time, and it frequently suffers from extended downtime due to hardware instability.
+This system has its own partition. You can run jobs with many CPUs and lots of memory, and it also has Nvidia GPUs for CUDA-accelerated software (typically deep learning or molecular dynamics). While it is free to use, it is very busy so it usually has a long wait time, and it frequently suffers from extended downtime due to hardware instability.
 You can read more about it [here](https://login.scg.stanford.edu/uv300/).
 
 ### Job arrays
-If you need to run a large number of jobs it is possible to use a job array with `sbatch` to automate this: https://slurm.schedmd.com/job_array.html.  If you need to do this it is likely to be expensive so please check with Stephen and ask on the lab Slack for additional guidance on how to do this.
+If you need to run a large number of jobs it is possible to use a job array with `sbatch` to automate this: https://slurm.schedmd.com/job_array.html. If you need to do this it is likely to be expensive, so make sure you know what you're doing.
 
 ## Software modules on SCG 
 `module load <module>` is your friend. If you can Google the bioinformatics tool, chances are SCG has already installed the software, and it’s loaded in a module. if you see `command not found`, try loading a module.  
@@ -200,14 +198,14 @@ By default, an `.rstudio` folder is created in your home directory the first tim
 SLURM is the job scheduler that SCG uses. See SCG documentation of SLURM basics [here](https://login.scg.stanford.edu/tutorials/job_scripts/). Here are a few commands to know:
 
 ### `squeue`
-`squeue -u SUNETID` gives a list of the jobs currently running under your name (`interactive` or `batch` partition. you can use the `-p` flag to specify, e.g. `squeue -u nicolerg -p batch`)
+`squeue -u SUNETID` gives a list of the jobs currently running under your name (`interactive` or `batch` partition. you can use the `-p` flag to specify, e.g. `squeue -u username -p batch`)
 
 ### `sacct`
 `sacct -j JOBID`, for example, tells you the amount of resources used for recent jobs.  
 
 This is particularly important if you are planning to run a large number of jobs on the BILLED `batch` partition - run one job first, see how many resources it required, and limit the resources you request for your batch of jobs. This is ESPECIALLY important for number of CPUs requested since SCG charges per CPU hour. If you request 2 CPUs but your process only uses 1, you still pay for those 2 CPUs as long as your job runs. SCG charges based on actual CPU time, NOT total time requested (i.e. request as much time as you want, with the knowledge that longer jobs will sit in the queue longer, but be thoughtful with your CPU requests).  
 
-eg: `sacct -u nicolerg -o JOBID,JobName,MaxRSS,nCPUs,CPUTime --starttime 03/20`
+eg: `sacct -u username -o JOBID,JobName,MaxRSS,nCPUs,CPUTime --starttime 03/20`
 
 Use the `-o` flag to change the format. e.g.:
   - `MaxRSS`: Roughly the memory required (request somewhat more than this)
@@ -219,7 +217,7 @@ Use the `--starttime` flag to change the time range in which to show job stats. 
 See other fields here: https://slurm.schedmd.com/sacct.html   
 
 ### `scancel`
-Kill a job. Use `-j JOBID` for a single job or `-u SUNETID` for ALL of your jobs. 
+Kill a job. Use `-j JOBID` for a single job or `-u SUNETID` for **ALL** of your jobs. 
 
 ### Other SLURM tips and tricks
   - `echo $SLURM_JOB_ID` will tell you if you’re inside a job (yes, you might forget when you get lost in the layers of screen sessions and interactive jobs)
@@ -231,5 +229,5 @@ Kill a job. Use `-j JOBID` for a single job or `-u SUNETID` for ALL of your jobs
   - See [this thread](https://susciclu.slack.com/archives/C8CNSTB88/p1550866979024200) in SCG Slack if you would like to keep track of resources for an interactive job. 
   - See [these instructions](https://login.scg.stanford.edu/tutorials/data_management/#samba) for how to mount SCG directories locally with Samba.  
   - Globus is another option for transferring files (https://www.globus.org) - it does not require 2-factor authentication!
-  - rclone (https://rclone.org) makes it possible to transfer data from SCG to Box (PHI approved!), Google Drive, Dropbox, Google Cloud etc.
+  - rclone (https://rclone.org) makes it possible to transfer data from SCG to Box (PHI approved!), Google Drive, Dropbox, Google Cloud etc. See [this tutorial]() for more info.
   - SCG is **NOT** PHI-approved
