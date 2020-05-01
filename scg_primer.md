@@ -43,7 +43,8 @@ Home directory quota is fixed at 32GB. Just about the only thing that should be 
 ### Lab directory 
 This is either `/labs/[LAB]` or `/oak/stanford/groups/[LAB]` depending on your PI. Most of your files should be in `${LAB_DIR}/SUNETID`. You may have to make this directory yourself when you first join a group on SCG.  
 
-Check the lab quota with `lfs quota -h -g scg_lab_[LAB] /oak` OR `lfs quota -h -g lab_[LAB] /oak` (for `/labs/[LAB]` and `/oak/stanford/groups/[LAB]`, respectively). 
+Check the lab quota with `lfs quota -hg scg_lab_[LAB] /oak` OR `lfs quota -hg oak_[LAB] /oak` (for `/labs/[LAB]` and `/oak/stanford/groups/[LAB]`, respectively). 
+
 
 ### Scratch space  
 Every node on has SCG (both login and batch) has scratch space mounted at `/tmp`.  This scratch is available only to that node, and the files you create there are visible only to your user.  You have to copy anything you want to save **back to Oak** if you want to be able to access it from other nodes or allow other users to see it.  
