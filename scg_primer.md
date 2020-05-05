@@ -58,7 +58,7 @@ There is no quota in this scratch space, but storage is not unlimited.  Files wi
 
 Launch a process in the `interactive` partition after logging in. There are two ways to do this: 
 
-#### Interactive session like durga 
+#### Interactive session
 1. Start a `screen`/`tmux` session (you should do this for any process that you expect to take more than a minute in case your connection to SCG is interrupted)  
 2. Launch a job in the `interactive` partition
     ```bash 
@@ -71,7 +71,7 @@ Launch a process in the `interactive` partition after logging in. There are two 
 
 Once the resources are allocated, you essentially get `ssh`-ed into a new bash session with the requested resources. Then you can start running scripts (almost) just like you would with `durga`. 
 
-#### Submit a job to the `interactive` session with `sbatch` 
+#### Submit a job to the `interactive` partition with `sbatch` 
 If you are running polished code or a standard pipeline that you don't need to worry about debugging, you may prefer to submit a job to the `interactive` job queue using `sbatch`. 
 
 First, write an `sbatch` script, e.g. `test_sbatch.sh`:
@@ -104,7 +104,7 @@ Use the `labstats` command to see how much CPU time each lab user has racked up 
 
 You submit jobs to the `batch` partition the same way, with a couple of added flags:  
 
-#### Interactive session like durga ON THE BILLED `batch` PARTITION 
+#### Interactive session ON THE BILLED `batch` PARTITION 
 The only reason you would do this is if you are out of resources on the `interactive` partition or you want to run a job with >128GB interactively (unlikely). 
 1. Start a `screen`/`tmux` session (you should do this for any process that you expect to take more than a minute in case your connection to SCG is interrupted)  
 2. Launch a job in the `batch` partition
