@@ -81,8 +81,6 @@ First, write an `sbatch` script, e.g. `test_sbatch.sh`:
 # See `man sbatch` or https://slurm.schedmd.com/sbatch.html for descriptions
 # of sbatch options.
 #SBATCH --job-name=test
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --partition=interactive
 #SBATCH --account=default
@@ -96,6 +94,8 @@ module load miniconda/3
 python some_python_script.py # this is the process I want to run with the sbatch script 
 ``` 
 Then submit the job using `sbatch test_sbatch.sh`. **It is critical that the `--partition` flag is set to `interactive` if you don't want to get billed.** 
+
+Note that `--cpus-per-task` is equivalent to the number of processes running in parallel.
 
 ### BILLED `batch` partition 
 The `batch` partition its ideal for parallelizations beyond 16 cores or processes requiring more than 128GB of memory. Billing is done for number of CPUs used * actual run time - SCG does not charge for memory usage (but if you request too much your job might never run).
@@ -128,8 +128,6 @@ First, write an `sbatch` script, e.g. `test_sbatch.sh`:
 # See `man sbatch` or https://slurm.schedmd.com/sbatch.html for descriptions
 # of sbatch options.
 #SBATCH --job-name=test
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --partition=batch
 #SBATCH --account=[LAB_ACCOUNT]
@@ -142,7 +140,9 @@ set -e
 module load miniconda/3
 python some_python_script.py # this is the process I want to run with the sbatch script 
 ``` 
-Then submit the job using `sbatch test_sbatch.sh`. 
+Then submit the job using `sbatch test_sbatch.sh`.  
+
+Note that `--cpus-per-task` is equivalent to the number of processes running in parallel.
 
 ### `nih_s10` NIH Supercomputer
 This system has its own partition. You can run jobs with many CPUs and lots of memory, and it also has Nvidia GPUs for CUDA-accelerated software (typically deep learning or molecular dynamics). While it is free to use, it is very busy so it usually has a long wait time, and it frequently suffers from extended downtime due to hardware instability.
