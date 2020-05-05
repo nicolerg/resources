@@ -87,6 +87,7 @@ First, write an `sbatch` script, e.g. `test_sbatch.sh`:
 #SBATCH --partition=interactive
 #SBATCH --account=default
 #SBATCH --time=12:00:00
+#SBATCH --mem-per-cpu=5G
 
 # by default, log files are written to the pwd 
 
@@ -133,6 +134,7 @@ First, write an `sbatch` script, e.g. `test_sbatch.sh`:
 #SBATCH --partition=batch
 #SBATCH --account=[LAB_ACCOUNT]
 #SBATCH --time=12:00:00
+#SBATCH --mem-per-cpu=5G
 
 # by default, log files are written to the pwd 
 
