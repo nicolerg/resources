@@ -189,10 +189,7 @@ Once you're done working with Box, use `killall rclone` or otherwise kill the `r
 
 ## Copy a few files < 15GB to Box
 
-See the next section if you would like to copy a single large folder to Box. Alternatively, if you would like to have more control over how a large amount of data is tarred, generate gzipped tarballs yourself and copy them to Box. For example, if you have a few tarballs that are less than 15GB each, move them to a new otherwise empty folder called `transfer`. Then do the following:
-
-1. Mount Box locally, e.g. `rclone mount Box:some_lab/some_user /labs/some_lab/some_user/BOX &` (see [Mount Box](https://www.notion.so/How-to-use-Box-d765dbc663af457fa83c0b8108d2b06a#ce3e2e7ff5684e3ba902d0a298543a1f))
-2. Use `rclone copy [source] [destn]`, e.g. `rclone copy transfer Box:some_lab/some_user/PROJECT_BACKUP`
+See the next section if you would like to copy a single large folder to Box. Alternatively, if you would like to have more control over how a large amount of data is tarred, generate gzipped tarballs yourself and copy them to Box. For example, if you have a few tarballs that are less than 15GB each, move them to a new otherwise empty folder called `transfer`. Then use `rclone copy [source] [destn]`, e.g. `rclone copy transfer Box:some_lab/some_user/PROJECT_BACKUP`
 
 This will copy all files in `transfer` (but not the directory itself) to the `some_lab/some_user/PROJECT_BACKUP` path on Box. If the destination path does not yet exist on Box, running this command will make it and place files in `transfer` there.
 
