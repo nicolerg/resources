@@ -84,7 +84,7 @@ This means that if you
 then rclone will return an error which includes the text `Invalid refresh token`. This means you have to refresh the token. Do the following:
 
 1. On your personal computer, open a terminal and type `rclone authorize box`. A browser window will pop up in your default browser, where you will be asked to sign in to Box, and then grant rclone access to it. When finished, you will see that one of the last lines of output in the terminal will be an authorization token. Save this for later. 
-2. Run `rclone config` and follow these prompts:
+2. On SCG or another remote machine, run `rclone config` and follow these prompts:
 
     ```
     Current remotes:
