@@ -10,7 +10,8 @@ This documentation applies to v1.7.0 of the [ENCODE ATAC-seq pipeline](https://g
 
 ### Table of Contents:
     
-1. [Install and test ENCODE ATAC-seq pipeline and dependencies](#1-install-and-test-encode-atac-seq-pipeline-and-dependencies)    
+1. [Install and test ENCODE ATAC-seq pipeline and dependencies](#1-install-and-test-encode-atac-seq-pipeline-and-dependencies)
+
     1.1 Clone the ENCODE repository
 
     1.2 Install the `Conda` environment with all software dependencies
