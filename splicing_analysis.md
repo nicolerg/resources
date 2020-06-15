@@ -1,4 +1,5 @@
 ## Resources: 
+- [Introduction to RNA-seq](https://www.youtube.com/watch?v=tlf6wYJrwKY&list=PLblh5JKOoLUJo2Q6xK4tZElbIvAACEykp)
 - [Leafcutter vignette](http://davidaknowles.github.io/leafcutter/)
 - [Alignment and quantification tutorial](https://github.com/smontgomlab/bios201/tree/master/Workshop2)
 - [STAR manual](https://physiology.med.cornell.edu/faculty/skrabanek/lab/angsd/lecture_notes/STARmanual.pdf) (see section 8)
