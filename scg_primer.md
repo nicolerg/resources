@@ -24,7 +24,7 @@ If you would like to contribute information, please add a pull request!
 
 ## Other resources 
   - SCG docs: https://login.scg.stanford.edu/  
-  - SCG Slack: https://susciclu.slack.com **If you use SCG, I highly recommend joining this Slack Workspace.** You are likely to get responses from SCG employees or other members of the SCG community if you post a question or error that a Google search didn’t help you answer. It’s also the place to post software installation requests (`#software-install-requests` channel). 
+  - SCG Slack: https://susciclu.slack.com **If you use SCG, I highly recommend joining this Slack Workspace.** You are likely to get responses from SCG employees or other members of the SCG community if you post a question or error that a Google search didn’t help you answer. It’s also the place to post software installation requests (`#scg-software-requests` channel). 
   
 ## Login nodes 
 You start on a login node every time you log in to SCG. Login nodes are the same nodes as the interactive partition, but they still have limited resources (16GB of memory and a restricted number of processes) until you start a session in the interactive partition. Login nodes are meant for navigating directories, starting `screen`/`tmux` sessions, and other non-intenstive, minor processes. 
