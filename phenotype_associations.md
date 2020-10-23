@@ -12,3 +12,5 @@
 Save two values from each test:  
 - p-value (does the full model explain significantly more variance relative to the reduced model?) 
 - likelihood ratio (roughly interpreted as how much additional variance is explained by the full model relative to the reduced model)  
+Look at distributions of each of these values.  
+Plot individual analytes with the highest likelihood ratios (or smallest p-values). 
