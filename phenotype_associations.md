@@ -1,5 +1,10 @@
 # Phenotype associations with molecular measurements 
 
+## How to code VO2max
+- Percent change in VO2max: `(second test - first test)/(first test)*100`
+- VO2max normalized to lean mass
+- VO2max normalized to total mass 
+
 ## Likelihood ratio tests to test for the significance of the interaction between sex and training  
 - Full model: `vo2 ~ sex + time + sex:time`
 - Reduced model: `vo2 ~ sex + time` 
