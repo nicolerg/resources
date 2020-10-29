@@ -12,7 +12,7 @@
 Time, meaning weeks trained, should be coded as a number: 0, 1, 2, 4, or 8. 
 
 ## Likelihood ratio tests to test for the significance of analyte as a predictor 
-- Full model: `vo2 ~ sex + time + sex:time + sex:analyte + analye:time + analyte`
+- Full model: `vo2 ~ sex + time + sex:time + sex:analyte + analye:time + sex:time:analyte + analyte`
 - Reduced model: `vo2 ~ sex + time sex:time`  
 
 Time, meaning weeks trained, should be coded as a number: 0, 1, 2, 4, or 8. 
