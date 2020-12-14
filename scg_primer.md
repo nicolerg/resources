@@ -54,7 +54,7 @@ There is no quota in this scratch space, but storage is not unlimited.  Files wi
 ## Compute partitions 
 
 ### FREE `interactive` partition 
-16 cores, 128GB total are available for all running interactive jobs **PER PERSON**. You can split up those resources any way you would like. 
+16 cores, 128GB total are available for all running interactive jobs **PER PERSON**. You can split up those resources any way you would like. Jobs in the interactive partition are limited to 24 hours.  
 
 Launch a process in the `interactive` partition after logging in. There are two ways to do this: 
 
