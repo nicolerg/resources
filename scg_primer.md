@@ -19,6 +19,7 @@ If you would like to contribute information, please add a pull request!
   - [Installing software on SCG](#installing-software-on-scg)
   - [SCG OnDemand](#scg-ondemand)
       - [Interactive RStudio](#interactive-rstudio)
+  - [Data access](#data-access)
   - [SLURM basics](#slurm-basics)
   - [Miscellaneous tidbits](#miscellaneous-tidbits)
 
@@ -202,6 +203,13 @@ By default, an `.rstudio` folder is created in your home directory the first tim
 1. Kill your sessions
 2. `mv ~/.rstudio ~/.rstudio-backup && ln -s /tmp ~/.rstudio`
 3. Start a new session. Things should be faster now! (the file system that uses `/tmp` is faster)
+
+## Data access
+
+### Mount SCG locally with `samba`
+Mounting files locally means you can directly edit SCG files in a desktop text editor instead of using a command line text editor on SCG. One way to do this is with `samba`. Find platform-specific instructions about how to mount SCG with `samba` [here](https://login.scg.stanford.edu/tutorials/data_movement/#samba). To mount native SCG files (e.g `/labs` or `/projects`), use `smb://samba.scg.stanford.edu/`.  
+
+> For Montgomery Lab users: to mount Montgomery Lab Oak storage (e.g. `/oak/stanford/groups/smontgom`), use `smb://oak-smb-smontgom.stanford.edu`  
 
 ## SLURM basics
 SLURM is the job scheduler that SCG uses. See SCG documentation of SLURM basics [here](https://login.scg.stanford.edu/tutorials/job_scripts/). Here are a few commands to know:
