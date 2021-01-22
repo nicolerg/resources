@@ -37,6 +37,8 @@ echo 'alias scg="ssh SUNETID@login04.scg.stanford.edu"' >> ~/.bash_profile
 ```
 The first time you add this line to your `~/bash*` file, you have to run `source ~/.bash_profile` for the alias to register. After that, the `scg` command will be recognized every time you start Terminal. Then just run `scg` to log in to SCG.  
 
+> Note: `~/.bash_profile` and `~/.bashrc` are only automatically `source`d if your shell is `bash`. If your shell is `zsh`, add this line to `~/.zprofile` instead. If you are not sure which shell you are using, run `echo $SHELL`.   
+
 ## Directories 
 ### Home directory (`~/SUNETID`)
 Home directory quota is fixed at 32GB. Just about the only thing that should be there is software that you install.  
