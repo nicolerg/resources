@@ -35,7 +35,7 @@ git add -A :/
 ```
 
 #### 3.2 Commit (or save) changes  
-This is the essentially the "save your work" command. To save *all* new changes you have made (both new files and changes to existing files), use: 
+This is essentially the "save your work" command. To save *all* new changes you have made (both new files and changes to existing files), use: 
 ```bash
 git commit -a -m "fig 1c analysis"
 ```
