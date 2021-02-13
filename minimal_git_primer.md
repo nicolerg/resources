@@ -46,6 +46,6 @@ Until you `push` your local commits to the remote repository, no one else can se
 ```bash
 git push origin john_analysis
 ```
-Now your version of the repository will be visible if a member navigates to https://github.com/MoTrPAC/motrpac-mawg, clickes on `master`, and selects `john_analysis` from the drop-down list of remote branches.  
+Now your version of the repository will be visible if a member navigates to https://github.com/MoTrPAC/motrpac-mawg, clicks on `master`, and selects `john_analysis` from the drop-down list of remote branches.  
 
 And that's it to get started! Continue to edit your code locally and push new changes to the remote branch you made in Step 4. Feel free to reach out if you have questions. 
