@@ -24,7 +24,7 @@ By default, when you clone the repository, you end up with a copy of the `master
 ```bash
 git checkout -b john_analysis
 ```
-You have now sitting in a copy of the `master` branch in your local repository called `john_analysis`. `git branch` will list the branches in your local repository and indicate with an asterisk that you are in the `john_analysis` branch. 
+You are now sitting in a local copy of the `master` branch called `john_analysis`. `git branch` will list the branches in your local repository and indicate with an asterisk that you are in the `john_analysis` branch. Changes you make to the code will now be added to the `john_analysis` branch instead of the `master` branch.  
 
 ### 3. Add new changes
 
