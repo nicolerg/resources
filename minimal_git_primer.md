@@ -42,7 +42,7 @@ git commit -a -m "fig 1c analysis"
 The `-m` flag is used to annotate your commit with a brief message.  
 
 ### 3. Push your local branch to the `motrpac-mawg` repository
-Until you `push` your local commits to the remote repository, no one else can see your code. To push the commits to a branch called `nicolerg_analysis` viewable on https://github.com/MoTrPAC/motrpac-mawg, run:
+Until you `push` your local commits to the remote repository, no one else can see your code. To push your changes/additions to a branch called `nicolerg_analysis` viewable on https://github.com/MoTrPAC/motrpac-mawg, run:
 ```bash
 git push origin nicolerg_analysis
 ```
