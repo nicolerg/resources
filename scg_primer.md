@@ -196,8 +196,8 @@ For particularly tricky installations, or just for anything you think might be u
 Options for more advanced users include Linuxbrew (https://docs.brew.sh/Homebrew-on-Linux), your own Miniconda installation (https://docs.conda.io/en/latest/miniconda.html), and `local::lib` for Perl packages (but really, try to avoid Perl if possible!)
 
 ## SCG OnDemand
-I <3 SCG OnDemand: https://ondemand.scg.stanford.edu/pun/sys/dashboard 
-  - `Files` tab lets you do file I/O in your home or `/labs/smontgom` paths 
+I <3 [SCG OnDemand](https://ondemand.scg.stanford.edu/pun/sys/dashboard). If off-campus, you must be connected to the [Stanford VPN](https://uit.stanford.edu/service/vpn) to access OnDemand.  
+  - `Files` tab lets you do file I/O in your home, lab, or project paths 
   - `Interactive Apps` lets you run RStudio, Jupyter Notebooks, and other tools interactively while using SCG file systems and compute resources 
   
 ### Interactive RStudio
@@ -209,7 +209,7 @@ By default, an `.rstudio` folder is created in your home directory the first tim
 ## Data access
 
 ### Mount SCG locally with `samba`
-Mounting files locally means you can directly edit SCG files in a desktop text editor instead of using a command line text editor on SCG. One way to do this is with `samba`. Find platform-specific instructions about how to mount SCG with `samba` [here](https://login.scg.stanford.edu/tutorials/data_movement/#samba). To mount native SCG files (e.g `/labs` or `/projects`), use `smb://samba.scg.stanford.edu/`.  
+Mounting files locally means you can directly edit SCG files in a desktop text editor instead of using a command line text editor on SCG. One way to do this is with `samba`. Find platform-specific instructions about how to mount SCG with `samba` [here](https://login.scg.stanford.edu/tutorials/data_movement/#samba). To mount native SCG files (e.g `/labs` or `/projects`), use `smb://samba.scg.stanford.edu/`. If off-campus, you must be connected to the [Stanford VPN](https://uit.stanford.edu/service/vpn) to use `samba`.   
 
 > For Montgomery Lab users: to mount Montgomery Lab Oak storage (e.g. `/oak/stanford/groups/smontgom`), use `smb://oak-smb-smontgom.stanford.edu`  
 
