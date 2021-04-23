@@ -24,3 +24,4 @@ Rscript randomization.R \
     -a ADU830-10060.csv PED830-10062.csv \
     -o ../batches > ../batches/out.log 2>&1
 ```
+See an example of this log file [here](examples/out.log). 
