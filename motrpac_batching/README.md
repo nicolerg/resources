@@ -90,4 +90,4 @@ optional arguments:
 ```
 
 ### Help
-For questions about the documentation or bugs in the code, please email Nicole at nicolerg@stanford.edu.   
+For questions about the documentation or any issues with the code, please email Nicole at nicolerg@stanford.edu.   
