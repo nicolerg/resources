@@ -1,6 +1,6 @@
 # MoTrPAC clinical sample batching 
 
-Use `randomization.R` to make well-balanced batches of MoTrPAC human samples in terms of clinical site, intervention group, age, and sex. 
+Use [`randomization.R`](randomization.R) to make well-balanced batches of MoTrPAC human samples in terms of clinical site, intervention group, age, and sex. 
 
 ### Inputs  
 - Shipment manifest Excel file(s) from the Biorepository, e.g. `Stanford_ADU830-10060_120720.xlsx`  
