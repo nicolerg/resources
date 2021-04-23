@@ -24,7 +24,7 @@ Use [`randomization.R`](randomization.R) to make well-balanced batches of MoTrPA
   ii. Identify the number of samples associated with each participant ID (pid) in the sample group, "N"  
   iii. For each pid, define the "group" as the combination of clinical site (`codedsiteid`) and intervention (`randomgroupcode`)  
   iv. Order pids by "N" then "group", largest to smallest    
-  v. Iterate through the ordered rows of pids, starting with individuals with the largest number of corresponding samples, and interatively assign pids to batches, ensuring that the max batch size is not exceeded  
+  v. Iterate through the ordered rows of pids, starting with individuals with the largest number of corresponding samples, and interatively assign pids to consecutive batches, ensuring that the max batch size is not exceeded  
   vi. Print batch composition to `stdout`  
   vii. Output shipment positions and batch assignments to file  
 
