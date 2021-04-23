@@ -1,6 +1,6 @@
 # MoTrPAC clinical sample batching 
 
-Use `randomization.R` to make well-balanced batches of MoTrPAC human samples in terms of clinical site, intervention group, age, and sex.  
+Use `randomization.R` to make well-balanced batches of MoTrPAC human samples in terms of clinical site, intervention group, age, and sex. 
 
 ### Inputs  
 - Shipment manifest Excel file(s) from the Biorepository, e.g. `Stanford_ADU830-10060_120720.xlsx`  
@@ -16,14 +16,17 @@ Use `randomization.R` to make well-balanced batches of MoTrPAC human samples in 
   - Unblinded batching metadata in the format `precovid_[SAMPLE_TYPE]-samples_UNBLINDED-batch-characteristics.csv`  
 - Summary of batch characteristics (`stdout`) (see example [here](examples/out.log))  
 
-### Methodlogy 
+### Methodology  
 1. Merge all shipment manifests and metadata files  
 2. Define sample groups for batching (sample type code, and assay if applicable)  
 3. For each sample group:  
   i. Predefine the number and max size of batches  
-  ii. Identify the number of samples associated with each participant ID (pid) in the sample group 
-  iii. 
-  
+  ii. Identify the number of samples associated with each participant ID (pid) in the sample group, "N"  
+  iii. For each pid, define the "group" as the combination of clinical site (`codedsiteid`) and intervention (`randomgroupcode`)  
+  iv. Order pids by "N" then "group", largest to smallest    
+  v. Iterate through the ordered rows of pids, starting with individuals with the largest number of corresponding samples, and interatively assign pids to batches, ensuring that the max batch size is not exceeded  
+  vi. Print batch composition to `stdout`  
+  vii. Output shipment positions and batch assignments to file  
 
 ### Usage 
 
@@ -62,7 +65,7 @@ See an example of this log file [here](examples/out.log).
 
 Alternatively, run the script interactively in RStudio by commenting out lines 13-26 and manually defining arguments on lines 28-31.  
 
-#### Argument documentation
+### Argument documentation
 Run `Rscript randomization.R -h` to see a help message similar to this one:  
 ```bash
 usage: Rscript randomization.R [-h]
@@ -85,3 +88,6 @@ optional arguments:
   -n MAX_N_PER_BATCH, --max-n-per-batch MAX_N_PER_BATCH
                         Max number of samples per batch. Default: 94 
 ```
+
+### Help
+For questions about the documentation or bugs in the code, please submit an issue to this repository.   
