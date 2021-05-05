@@ -81,6 +81,13 @@ ship[,`2d barcode` := as.character(`2d barcode`)]
 all_meta = merge(api, ship, by='viallabel')
 assert(nrow(all_meta) == nrow(ship))
 all_meta[all_meta=='.'] = NA
+               
+if(nrow(all_meta)!=nrow(api)){
+  warning(sprintf("The number of samples in the merged metadata (%s) is not the same as the number of samples in the biospecimen metadata '%s' (%s). Check for a merging error.\n",
+          nrow(all_meta),
+          paste0(basename(apis), collapse=', '),
+          nrow(api)))
+}
 
 # subset to existing samples
 all_meta = all_meta[!(is.na(viallabel) | is.na(box))]
@@ -102,10 +109,13 @@ if("assay" %in% colnames(all_meta)){
 # remove columns with 0 variance
 remove = c()
 for(c in colnames(all_meta)){
+  if(c == 'sampletypecode'){next} # don't remove this column
   if(length(unique(all_meta[,get(c)]))==1){
     remove = c(remove, c)
   }
 }
+message(sprintf("Removing columns in the merged metadata with 0 variance: %s\n",
+                paste0(remove, collapse=', ')))
 all_meta[,(remove) := NULL]
 
 #table(all_meta[,sampletypecode], all_meta[,randomgroupcode])
