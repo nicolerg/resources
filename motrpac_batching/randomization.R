@@ -106,17 +106,16 @@ if("assay" %in% colnames(all_meta)){
                          box, position)]
 }
 
-# remove columns with 0 variance
+# columns with 0 variance
 remove = c()
 for(c in colnames(all_meta)){
-  if(c == 'sampletypecode'){next} # don't remove this column
   if(length(unique(all_meta[,get(c)]))==1){
     remove = c(remove, c)
   }
 }
-message(sprintf("Removing columns in the merged metadata with 0 variance: %s\n",
+message(sprintf("These columns have 0 variance in the merged metadata: %s\n",
                 paste0(remove, collapse=', ')))
-all_meta[,(remove) := NULL]
+# all_meta[,(remove) := NULL]
 
 #table(all_meta[,sampletypecode], all_meta[,randomgroupcode])
 # 4 = PaxGene RNA
