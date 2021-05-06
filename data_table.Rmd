@@ -1,0 +1,75 @@
+---
+title: "Things I wish I knew about R data.table when I started"
+author: "Nicole Gay"
+date: "5/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(data.table)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Make a simple data.table: 
+```{r}
+dt = data.table(column1 = seq(1:10), 
+                column2 = rep(LETTERS[seq( from = 1, to = 10 )], 2),
+                column3 = rep(c(TRUE, FALSE), 5))
+head(dt)
+```
+
+The row index for data.table works as expected. By default, all columns are included. 
+```{r}
+dt[1:5]
+```
+
+Subset columns one of two ways:
+
+1. This is preferred if you're in RStudio or some other IDE that autocompletes variables   
+```{r}
+dt[,.(column1, column2)]
+dt[1:5,.(column1, column2)]
+```
+
+2. This is useful if you're defining column names in a string.    
+
+`with=F` is necessary when you're using strings to subset columns.    
+```{r} 
+cols = c('column1', 'column2')
+dt[, cols, with=F] 
+```
+
+A data.table's column names are in the local scope when you start doing stuff inside the brackets. It's part of what makes data.table so awesome. But that also means something like this won't do what you want:
+```{r}
+column1 = 2
+dt[column1 == column1]
+```
+
+Instead, if you know you are going to use a variable to subset a data.table, make it distinguishable from the data.table's column names. My go-to is to use all caps, e.g. 
+```{r}
+COLUMN1 = 2
+dt[column1 == COLUMN1]
+```
+
+This is a neat little trick I end up using a lot when I want to stratify a calculation by other variable(s):
+```{r}
+dt[,list(max_column1 = max(column1)),
+   by=column3]
+dt[,list(max_column1 = max(column1)),
+   by=.(column2, column3)]
+```
+
+You can calculate many variables at a time; you can include other columns in these calculations:
+```{r}
+dt[,list(max_column1 = max(column1),
+         min_column1 = min(column1),
+         which_max_column2 = column2[which.max(column1)]),
+   by=column3]
+```
+
+Something else I don't use as much but is probably good to know - how to apply a function to a subset of columns:
+```{r}
+dt[,column1]
+dt[,(cols) := lapply(.SD, as.character), .SDcols = c('column1', 'column2')]
+dt[,column1]
+```
