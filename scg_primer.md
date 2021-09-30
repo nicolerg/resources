@@ -65,11 +65,11 @@ Launch a process in the `interactive` partition after logging in. There are two 
 1. Start a `screen`/`tmux` session (you should do this for any process that you expect to take more than a minute in case your connection to SCG is interrupted)  
 2. Launch a job in the `interactive` partition
     ```bash 
-    sdev -c 1 -m 20G -t 24:00:00
+    sdev -c 1 -m 20 -t 24:00:00
     ```
     - `sdev` is a shortcut for `srun`, which is a SLURM command 
     - `-c`: number of cores
-    - `-m`: memory (`M` or `G` suffix) 
+    - `-m`: memory in GB 
     - `-t`: time (format `DD-HH:MM:SS`) 
 
 Once the resources are allocated, you essentially get `ssh`-ed into a new bash session with the requested resources. Then you can start running scripts (almost) just like you would with `durga`. 
@@ -112,11 +112,11 @@ The only reason you would do this is if you are out of resources on the `interac
 1. Start a `screen`/`tmux` session (you should do this for any process that you expect to take more than a minute in case your connection to SCG is interrupted)  
 2. Launch a job in the `batch` partition
     ```bash 
-    sdev -c 1 -m 20G -t 24:00:00 -a [LAB_ACCOUNT] -p batch
+    sdev -c 1 -m 20 -t 24:00:00 -a [LAB_ACCOUNT] -p batch
     ```
     - `sdev` is a shortcut for `srun`, which is a SLURM command 
     - `-c`: number of cores
-    - `-m`: memory (`M` or `G` suffix) - bump this up if you get a core dump or out-of-memory error
+    - `-m`: memory in GB - bump this up if you get a core dump or out-of-memory error
     - `-t`: time (format `DD-HH:MM:SS`)
     - `-a`: account (not sure what this is? run `scgwhoami` when logged into SCG and look under `Available SLURM Accounts`)
     - `-p`: partition, either `interactive` (default, free) or `batch` (billed; requires `-a`)
