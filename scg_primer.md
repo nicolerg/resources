@@ -72,7 +72,7 @@ Launch a process in the `interactive` partition after logging in. There are two 
     - `-m`: memory in GB 
     - `-t`: time (format `DD-HH:MM:SS`) 
 
-Once the resources are allocated, you essentially get `ssh`-ed into a new bash session with the requested resources. Then you can start running scripts (almost) just like you would with `durga`. 
+Once the resources are allocated, you essentially get `ssh`-ed into a new bash session with the requested resources. Then you can start running scripts (almost) just like you would locally on your laptop. 
 
 #### Submit a job to the `interactive` partition with `sbatch` 
 If you are running polished code or a standard pipeline that you don't need to worry about debugging, you may prefer to submit a job to the `interactive` job queue using `sbatch`. 
@@ -189,7 +189,7 @@ Always [check if a module exists](#software-modules-on-scg) before installing so
 - For `python` modules:  
     - Load the `python` module corresponding to the version in which you want to install the package (e.g. `module load miniconda/3`)  
     - Use `pip install --user MODULE` to install a module locally. Note you will need to load the same module before trying to import this module in the future (e.g. `module load miniconda/3`)  
-- For anything else: Install it as you would on durga, either in your home directory or in a `SOFTWARE` subfolder in your lab directory. 
+- For anything else: Install it in your home directory or in a `SOFTWARE` subfolder in your lab directory. 
 
 For particularly tricky installations, or just for anything you think might be useful for anyone else on SCG, add a software installation request to the `#software-install-requests` channel in [SCG's Slack Workspace](https://susciclu.slack.com). I tend to install software myself and also add a request to the channel for anything that's not already installed on SCG.  
 
