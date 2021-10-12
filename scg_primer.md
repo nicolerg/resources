@@ -101,9 +101,11 @@ Then submit the job using `sbatch test_sbatch.sh`. **It is critical that the `--
 Note that `--cpus-per-task` is equivalent to the number of processes running in parallel.
 
 ### BILLED `batch` partition 
-The `batch` partition its ideal for parallelizations beyond 16 cores or processes requiring more than 128GB of memory. Billing is done for number of CPUs used * actual run time - SCG does not charge for memory usage (but if you request too much your job might never run).
+The `batch` partition its ideal for parallelizations beyond 16 cores or processes requiring more than 128GB of memory. Billing is done for number of CPUs used * actual run time - SCG does not charge for memory usage (but if you request too much your job might never run).  
 
 Use the `labstats` command to see how much CPU time each lab user has racked up during the billed month.  
+
+Max resource requests on the `batch` partition are 1 TB memory and 48 CPUs. [Memory per CPU is node-specific](https://login.scg.stanford.edu/configuration/).  
 
 You submit jobs to the `batch` partition the same way, with a couple of added flags:  
 
