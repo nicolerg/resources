@@ -125,6 +125,8 @@ The only reason you would do this is if you are out of resources on the `interac
     - `-a`: account (not sure what this is? run `scgwhoami` when logged into SCG and look under `Available SLURM Accounts`)
     - `-p`: partition, either `interactive` (default, free) or `batch` (billed; requires `-a`)
 
+> Note: Use `srun` instead of `sdev` to bill project (instead of lab) accounts, e.g. `srun -p batch -A prj_[PROJECT] -t 1:00:00 -c 2 --mem-per-cpu=8 --pty /bin/bash`
+
 #### Submit a job to the BILLED `batch` session with `sbatch` 
 If you are running polished code or a standard pipeline that you don't need to worry about debugging, you may prefer to submit a job to the `batch` job queue using `sbatch`. 
 
