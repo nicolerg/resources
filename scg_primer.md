@@ -74,6 +74,8 @@ Launch a process in the `interactive` partition after logging in. There are two 
 
 Once the resources are allocated, you essentially get `ssh`-ed into a new bash session with the requested resources. Then you can start running scripts (almost) just like you would locally on your laptop. 
 
+> Note: Use `srun` instead of `sdev` to bill project (instead of lab) accounts, e.g. `srun -p batch -A prj_[PROJECT] -t 1:00:00 -c 2 --mem-per-cpu=8 --pty /bin/bash`
+
 #### Submit a job to the `interactive` partition with `sbatch` 
 If you are running polished code or a standard pipeline that you don't need to worry about debugging, you may prefer to submit a job to the `interactive` job queue using `sbatch`. 
 
