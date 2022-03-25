@@ -33,7 +33,7 @@ You start on a login node every time you log in to SCG. Login nodes are the same
 Because there are several login nodes and screen sessions are only available on the node on which they were initialized, I **highly recommend** adding an alias to your **LOCAL** `~/.bashrc` or `~/.bash_profile` to set a persistent login node (it doesn't matter which one). That way, you will always log into the same login node whenever you connect to SCG, and your `screen` sessions will always be where you expect them. For example:
 
 ```bash
-echo 'alias scg="ssh SUNETID@login04.scg.stanford.edu"' >> ~/.bash_profile
+echo 'alias scg="ssh SUNETID@login.scg.stanford.edu"' >> ~/.bash_profile
 ```
 The first time you add this line to your `~/bash*` file, you have to run `source ~/.bash_profile` for the alias to register. After that, the `scg` command will be recognized every time you start Terminal. Then just run `scg` to log in to SCG.  
 
@@ -86,7 +86,7 @@ First, write an `sbatch` script, e.g. `test_sbatch.sh`:
 # See `man sbatch` or https://slurm.schedmd.com/sbatch.html for descriptions
 # of sbatch options.
 #SBATCH --job-name=test
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=1
 #SBATCH --partition=interactive
 #SBATCH --account=default
 #SBATCH --time=12:00:00
@@ -137,7 +137,7 @@ First, write an `sbatch` script, e.g. `test_sbatch.sh`:
 # See `man sbatch` or https://slurm.schedmd.com/sbatch.html for descriptions
 # of sbatch options.
 #SBATCH --job-name=test
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=1
 #SBATCH --partition=batch
 #SBATCH --account=[LAB_ACCOUNT]
 #SBATCH --time=12:00:00
@@ -168,7 +168,9 @@ Some `module` commands:
   - `module keyword <keyword>`: Search for modules containing a keyword; use arrow keys to scroll; `q` to exit 
   - `module unload <module>`: Unload a module 
   - `module purge`: Unload all modules (i.e. revert back to login state)
-  
+  - 
+**Reproducibility note:** We know that computational reproducibility is very vital for scientific rigor and advancement. Using the same version of software across batches of data and reporting the bioinformatics software version in the manuscript is very important. Make a habit to use `module load <module>/<version>` in your scripts.
+
 *How can you find files associated with a module after you load it?*   
 Almost all module add the path to the modules programs/scripts to the `PATH` variable, so this will show you that entry:
 `echo $PATH | tr ':' '\n'`
