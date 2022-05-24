@@ -30,18 +30,30 @@ If you would like to contribute information, please add a pull request!
 ## Login nodes 
 You start on a login node every time you log in to SCG. Login nodes are the same nodes as the interactive partition, but they still have limited resources (16GB of memory and a restricted number of processes) until you start a session in the interactive partition. Login nodes are meant for navigating directories, starting `screen`/`tmux` sessions, and other non-intenstive, minor processes. 
 
-Because there are several login nodes and screen sessions are only available on the node on which they were initialized, I **highly recommend** adding an alias to your **LOCAL** `~/.bashrc` or `~/.bash_profile` to set a persistent login node (it doesn't matter which one). That way, you will always log into the same login node whenever you connect to SCG, and your `screen` sessions will always be where you expect them. For example:
+Because there are several login nodes and `screen`/`tmux` sessions are only available on the node on which they were initialized, I **highly recommend** adding an alias to your **LOCAL** `~/.bashrc` or `~/.bash_profile` to set a persistent login node (it doesn't matter which one). That way, you will always log into the same login node whenever you connect to SCG, and your `screen`/`tmux` sessions will always be where you expect them. For example:
 
 ```bash
-echo 'alias scg="ssh SUNETID@login.scg.stanford.edu"' >> ~/.bash_profile
+# replace SUNETID with *your* SUNET ID 
+echo 'alias scg="ssh SUNETID@login04.scg.stanford.edu"' >> ~/.bash_profile
 ```
+There are four login nodes, so adding any ONE of the following statements to `~/.bash_profile` will serve the same purpose as the command above:
+```bash
+# replace SUNETID with *your* SUNET ID 
+# only use ONE of these commands
+echo 'alias scg="ssh SUNETID@login01.scg.stanford.edu"' >> ~/.bash_profile
+echo 'alias scg="ssh SUNETID@login02.scg.stanford.edu"' >> ~/.bash_profile
+echo 'alias scg="ssh SUNETID@login03.scg.stanford.edu"' >> ~/.bash_profile
+```
+
 The first time you add this line to your `~/bash*` file, you have to run `source ~/.bash_profile` for the alias to register. After that, the `scg` command will be recognized every time you start Terminal. Then just run `scg` to log in to SCG.  
 
-> Note: `~/.bash_profile` and `~/.bashrc` are only automatically `source`d if your shell is `bash`. If your shell is `zsh`, add this line to `~/.zprofile` instead. If you are not sure which shell you are using, run `echo $SHELL`.   
+> Note: `~/.bash_profile` and `~/.bashrc` are only automatically `source`d if your shell is `bash`. If your shell is `zsh`, add this line to `~/.zprofile` instead. If you are not sure which shell you are using, run `echo $SHELL`.  
+
+> Note: Sometimes a single login node is being rebooted, and if that is the node you've specified in your alias above, you will have trouble connecting to SCG using the `scg` command while others do not. In this case, just log in using the standard `ssh SUNETID@login.scg.stanford.edu` to direct you to an available login node (though you will not see any `screen`/`tmux` sessions you started on the other node). When the node is done rebooting, your `scg` command will work again. 
 
 ## Directories 
 ### Home directory (`~/SUNETID`)
-Home directory quota is fixed at 32GB. Just about the only thing that should be there is software that you install.  
+Home directory quota is fixed at 32GB. Just about the only thing that should be there is software that you install. 
 
 ### Lab directory 
 This is either `/labs/[LAB]` or `/oak/stanford/groups/[LAB]` depending on your PI. Most of your files should be in `${LAB_DIR}/SUNETID`. You may have to make this directory yourself when you first join a group on SCG.  
