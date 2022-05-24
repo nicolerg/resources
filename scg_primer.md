@@ -223,8 +223,10 @@ I <3 [SCG OnDemand](https://ondemand.scg.stanford.edu/pun/sys/dashboard). If off
 ### Interactive RStudio
 By default, an `.rstudio` folder is created in your home directory the first time you start an RStudio session. For whatever reason, this can be REALLY slow (something about file I/O in the file system used for home directories). If you start noticing that basic commands in RStudio are being slow, do the following:
 1. Kill your sessions
-2. `mv ~/.rstudio ~/.rstudio-backup && ln -s /tmp ~/.rstudio`
+2. `mv ~/.local/share/rstudio ~/.rstudio-backup && ln -s /tmp ~/.local/share/rstudio`
 3. Start a new session. Things should be faster now! (the file system that uses `/tmp` is faster)
+
+You can also specify the following environmental variables to set the default working directory for RStudio sessions: `RSTUDIO_DATA_HOME` or `RSTUDIO_CONFIG_HOME` 
 
 ## Data access
 
