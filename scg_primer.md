@@ -257,6 +257,9 @@ Use the `--starttime` flag to change the time range in which to show job stats. 
 
 See other fields here: https://slurm.schedmd.com/sacct.html   
 
+### `seff`
+`seff JOBID` provides a nice summary of a completed job, e.g. resources used and state (completed, failed, out of memory, etc.). I now find this more useful than `sacct`.
+
 ### `scancel`
 Kill a job. Use `-j JOBID` for a single job or `-u SUNETID` for **ALL** of your jobs. 
 
