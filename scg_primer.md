@@ -272,6 +272,6 @@ Kill a job. Use `-j JOBID` for a single job or `-u SUNETID` for **ALL** of your 
   - Because of NFS things, I recommend adding a `--latency-wait` flag to your calls to `snakemake` pipelines. This means the pipeline will wait up to the specified number of seconds for a file to appear before aborting with an error. 
   - See [this thread](https://susciclu.slack.com/archives/C8CNSTB88/p1550866979024200) in SCG Slack if you would like to keep track of resources for an interactive job. 
   - See [these instructions](https://login.scg.stanford.edu/tutorials/data_management/#samba) for how to mount SCG directories locally with Samba.  
-  - Globus is another option for transferring files (https://www.globus.org) - it does not require 2-factor authentication!
+  - Globus is another option for transferring files (https://www.globus.org) - it does not require 2-factor authentication! As of April 2020, Globus can now be used for some of the cloud. See [this announcement](https://srcc.slack.com/archives/C8CSZF7DX/p1651006934170209) for details.  
   - rclone (https://rclone.org) makes it possible to transfer data from SCG to Box (PHI approved!), Google Drive, Dropbox, Google Cloud etc. See [this tutorial](https://github.com/nicolerg/resources/blob/master/rclone_box.md) for more info.
   - SCG is **NOT** PHI-approved
