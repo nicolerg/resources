@@ -221,12 +221,21 @@ I <3 [SCG OnDemand](https://ondemand.scg.stanford.edu/pun/sys/dashboard). If off
   - `Interactive Apps` lets you run RStudio, Jupyter Notebooks, and other tools interactively while using SCG file systems and compute resources 
   
 ### Interactive RStudio
-By default, an `.rstudio` folder is created in your home directory the first time you start an RStudio session. For whatever reason, this can be REALLY slow (something about file I/O in the file system used for home directories). If you start noticing that basic commands in RStudio are being slow, do the following:
-1. Kill your sessions
-2. `mv ~/.local/share/rstudio ~/.rstudio-backup && ln -s /tmp ~/.local/share/rstudio`
-3. Start a new session. Things should be faster now! (the file system that uses `/tmp` is faster)
+You can specify the following environmental variables to set the default working directory for RStudio sessions: `RSTUDIO_DATA_HOME` or `RSTUDIO_CONFIG_HOME`.
 
-You can also specify the following environmental variables to set the default working directory for RStudio sessions: `RSTUDIO_DATA_HOME` or `RSTUDIO_CONFIG_HOME` 
+#### Installing R packages  
+It is **not** recommended to install packages within OnDemand's RStudio. Trying to do so will often result in an error (see [here](https://srcc.slack.com/archives/CUY1Q7RQU/p1639576808045100) and [here](https://srcc.slack.com/archives/C8CNSTB88/p1643142536038300) and [here](https://srcc.slack.com/archives/C8CNSTB88/p1659038824687309)).
+
+Instead, log in to SCG in your terminal, load the appropriate version of R, and install the package via the command line. For example, to install `data.table` in R v4.0.3, do the following:
+```
+ssh SUNETID@login.scg.stanford.edu # or use your alias
+module load r/4.0.3
+R
+> install.packages("data.table")
+> q()
+exit
+```
+Then you will be able to load the package in your RStudio session running R v4.0.3 using `library(data.table)`. Note if the library has already been loaded, you will have to restart R before loading the library to load the most updated version. 
 
 ## Data access
 
@@ -274,4 +283,4 @@ Kill a job. Use `-j JOBID` for a single job or `-u SUNETID` for **ALL** of your 
   - See [these instructions](https://login.scg.stanford.edu/tutorials/data_management/#samba) for how to mount SCG directories locally with Samba.  
   - Globus is another option for transferring files (https://www.globus.org) - it does not require 2-factor authentication! As of April 2020, Globus can now be used for some of the cloud. See [this announcement](https://srcc.slack.com/archives/C8CSZF7DX/p1651006934170209) for details.  
   - rclone (https://rclone.org) makes it possible to transfer data from SCG to Box (PHI approved!), Google Drive, Dropbox, Google Cloud etc. See [this tutorial](https://github.com/nicolerg/resources/blob/master/rclone_box.md) for more info.
-  - SCG is **NOT** PHI-approved
+  - SCG is **NOT** PHI-approved. 
