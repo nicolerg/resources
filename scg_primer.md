@@ -19,6 +19,7 @@ If you would like to contribute information, please add a pull request!
   - [Installing software on SCG](#installing-software-on-scg)
   - [SCG OnDemand](#scg-ondemand)
       - [Interactive RStudio](#interactive-rstudio)
+          - [Installing R packages](#installing-r-packages)
   - [Data access](#data-access)
   - [SLURM basics](#slurm-basics)
   - [Miscellaneous tidbits](#miscellaneous-tidbits)
