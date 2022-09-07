@@ -21,6 +21,7 @@ If you would like to contribute information, please add a pull request!
       - [Interactive RStudio](#interactive-rstudio)
           - [Installing R packages](#installing-r-packages)
   - [Data access](#data-access)
+  - [Sharing data](#sharing-data)
   - [SLURM basics](#slurm-basics)
   - [Miscellaneous tidbits](#miscellaneous-tidbits)
 
@@ -244,6 +245,15 @@ Then you will be able to load the package in your RStudio session running R v4.0
 Mounting files locally means you can directly edit SCG files in a desktop text editor instead of using a command line text editor on SCG. One way to do this is with `samba`. Find platform-specific instructions about how to mount SCG with `samba` [here](https://login.scg.stanford.edu/tutorials/data_movement/#samba). To mount native SCG files (e.g `/labs` or `/projects`), use `smb://samba.scg.stanford.edu/`. If off-campus, you must be connected to the [Stanford VPN](https://uit.stanford.edu/service/vpn) to use `samba`.   
 
 > For Montgomery Lab users: to mount Montgomery Lab Oak storage (e.g. `/oak/stanford/groups/smontgom`), use `smb://oak-smb-smontgom.stanford.edu`  
+
+## Sharing lab data in Oak storage
+If you are the owner of the folder you want to share, you can change permissions for groups and individuals using `setfacl`. See details in the links below. If you are not the owner of the folder, send an email to <scg-action@lists.stanford.edu> with your request, CCing your PI. 
+
+### Sharing data only with specific members in your group/lab
+See this thread: https://srcc.slack.com/archives/C8CNSTB88/p1591307072353500
+
+### Sharing data with SCG users outside of your group/lab
+See this thread: https://srcc.slack.com/archives/C8CNSTB88/p1594668112463400
 
 ## SLURM basics
 SLURM is the job scheduler that SCG uses. See SCG documentation of SLURM basics [here](https://login.scg.stanford.edu/tutorials/job_scripts/). Here are a few commands to know:
