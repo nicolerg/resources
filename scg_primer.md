@@ -21,7 +21,7 @@ If you would like to contribute information, please add a pull request!
       - [Interactive RStudio](#interactive-rstudio)
           - [Installing R packages](#installing-r-packages)
   - [Data access](#data-access)
-  - [Sharing data](#sharing-data)
+  - [Sharing lab data in Oak storage](#sharing-lab-data-in-oak-storage)
   - [SLURM basics](#slurm-basics)
   - [Miscellaneous tidbits](#miscellaneous-tidbits)
 
@@ -204,14 +204,14 @@ A few of the most critical ones, for example:
   
 ## Installing software on SCG 
 Always [check if a module exists](#software-modules-on-scg) before installing software on SCG. If you're really sure you need to install it, there are a few ways to do it:  
-- For `R` packages:
-    - Load the `r` module corresponding to the version in which you want to install the package (e.g. `module load r/3.6`) 
-    - Launch `R` and install packages as usual (e.g. with `install.packages()`). The first time you do this, answer `yes` to let it make a library in your home directory.  
-    - Extra tidbit: Use the `.libPaths()` command in `R` to see which paths `R` is looking in to load libraries  
+
+- For `R` packages, see [Installing R packages](#installing-r-packages)
+
 - For `python` modules:  
     - Load the `python` module corresponding to the version in which you want to install the package (e.g. `module load miniconda/3`)  
     - Use `pip install --user MODULE` to install a module locally. Note you will need to load the same module before trying to import this module in the future (e.g. `module load miniconda/3`)  
-- For anything else: Install it in your home directory or in a `SOFTWARE` subfolder in your lab directory. 
+
+- For anything else: Install it in your home directory (`/home/[SUNETID]`, also called `$HOME`) or in a `SOFTWARE` subfolder in your lab directory. Your home directory is recommended because the file system where home directories live is much faster than other file systems like the one used by `/oak`. This is especially important for tools that do a lot of file I/O, like conda/mamba/micromamba. Therefore, you will see a *dramatic* improvement in performance if you install conda/mamba/micromamba in `$HOME` instead of `/oak`. 
 
 For particularly tricky installations, or just for anything you think might be useful for anyone else on SCG, add a software installation request to the `#software-install-requests` channel in [SCG's Slack Workspace](https://susciclu.slack.com). I tend to install software myself and also add a request to the channel for anything that's not already installed on SCG.  
 
@@ -228,7 +228,7 @@ You can specify the following environmental variables to set the default working
 #### Installing R packages  
 It is **not** recommended to install packages within OnDemand's RStudio. Trying to do so will often result in an error (see [here](https://srcc.slack.com/archives/CUY1Q7RQU/p1639576808045100) and [here](https://srcc.slack.com/archives/C8CNSTB88/p1643142536038300) and [here](https://srcc.slack.com/archives/C8CNSTB88/p1659038824687309)).
 
-Instead, log in to SCG in your terminal, load the appropriate version of R, and install the package via the command line. For example, to install `data.table` in R v4.0.3, do the following:
+Instead, log in to SCG in your terminal, load the appropriate version of R with `module load r/[version]`, start the R prompt on the command line by running `R`, and install the package in R. For example, to install `data.table` in R v4.0.3, do the following:
 ```
 ssh SUNETID@login.scg.stanford.edu # or use your alias
 module load r/4.0.3
@@ -288,8 +288,9 @@ Kill a job. Use `-j JOBID` for a single job or `-u SUNETID` for **ALL** of your 
   - If a running job looks “stuck”, i.e. it’s been actively running much longer than you would expect it to, `ssh` into the node it's running on and `htop` to see if it looks active. If there are processes running but with very low CPU usage, something may have gone wrong. Run `scontrol requeue JOBID` to kill and resubmit the job to the queue
   - To attach to a node running with `srun` (to see what processes are running, for example), run `srun --jobid JOBID --pty bash -l`. This is like SSHing into the node that the job is running on. `exit` will end that SSH session but not your srun-initiated jobs on that node. (Alternatively, you can actually just `ssh` into the node displayed from `squeue`.) 
 
-## Miscellaneous tidbits 
+## Miscellaneous tidbits
   - Because of NFS things, I recommend adding a `--latency-wait` flag to your calls to `snakemake` pipelines. This means the pipeline will wait up to the specified number of seconds for a file to appear before aborting with an error. 
+  - Related to the point above, if you get a `File doesn't exist` error when running a tool/pipeline in `/oak` or `/labs`, try using `/tmp` as your working directory instead. i.e., do all the heavy file I/O to `/tmp`, and move the final outputs to more permanent storage when the process completes. Note that `/tmp` is node-specific, unlike the file storage you're used to, so you will have to log back into the **same node** to retrieve files generated in `/tmp` if you log out of SCG before transferring results. You can use `sacct` to figure out which node a job was run on (see [SLURM basics](#sacct))
   - See [this thread](https://susciclu.slack.com/archives/C8CNSTB88/p1550866979024200) in SCG Slack if you would like to keep track of resources for an interactive job. 
   - See [these instructions](https://login.scg.stanford.edu/tutorials/data_management/#samba) for how to mount SCG directories locally with Samba.  
   - Globus is another option for transferring files (https://www.globus.org) - it does not require 2-factor authentication! As of April 2020, Globus can now be used for some of the cloud. See [this announcement](https://srcc.slack.com/archives/C8CSZF7DX/p1651006934170209) for details.  
